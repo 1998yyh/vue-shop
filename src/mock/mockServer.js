@@ -1,6 +1,4 @@
-/*
-使用mockjs提供mock数据接口
- */
+
 import Mock from 'mockjs'
 import data from './data.json'
 
