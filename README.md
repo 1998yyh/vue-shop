@@ -1,24 +1,30 @@
 # vue-shop
 
-> A Vue.js project
+> Vue外卖项目
 
-## Build Setup
+## 项目功能
 
-``` bash
-# install dependencies
-npm install
+脑壳痛啊，脑壳痛
 
-# serve with hot reload at localhost:8080
-npm run dev
+### 已完成
+	登录注册 （ 简单版本 )  新增手机验证功能 目前只支持本人手机 测试余额大概还有6元
+	首页
+	商品详情
+	购物车
+### 未完成 
+	搜索
+	还有啥……
 
-# build for production with minification
-npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 技术栈
 
-# Mockjs
-# better-scroll
+### 前台
+	Vue+Vue-router+Vuex+stylus+axios+better-scroll+miti-ui+vue-lazyload+mockjs
+
+### 后台
+	Express + Mongodb（mongoose）+ md5 + 熔炼云通信的手机验证码 + captcha图像验证码
+
+	mongodb主要就存了存用户数据  商品啥的数据太多了 就mock一下算了…………
+
+

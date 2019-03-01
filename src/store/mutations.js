@@ -1,4 +1,4 @@
-
+import Vue from "vue"
 import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORYS,
@@ -9,7 +9,8 @@ import {
   RECEIVE_INFO,
   RECEIVE_RATINGS,
   ADD_FOOD_COUNT,
-  REDUCE_FOOD_COUNT
+  REDUCE_FOOD_COUNT,
+  CLEAR_CAR
 } from "./mutation-types"
 
 export default {
@@ -39,6 +40,26 @@ export default {
   [RECEIVE_GOODS](state, {goods}) {
     state.goods = goods
   },
+  [ADD_FOOD_COUNT](state,{food}){
+    if (!food.count){
+      Vue.set(food,'count',1)
+      state.shopCar.push(food)
+    }else{
+      food.count++
+    }
+  },
+  [REDUCE_FOOD_COUNT](state,{food}){
+    if (food.count){
+      food.count--
+      if(food.count === 0){
+        state.shopCar.splice(state.shopCar.indexOf(food), 1)
+      }
+    }
+  },
+  [CLEAR_CAR](state){
+    state.shopCar.forEach(food=>food.count = 0)
+    state.shopCar = []
+  }
 
 
 }
