@@ -10,7 +10,8 @@ import {
   RECEIVE_RATINGS,
   ADD_FOOD_COUNT,
   REDUCE_FOOD_COUNT,
-  CLEAR_CAR
+  CLEAR_CAR,
+  RECEIVE_SEARCH_SHOPS
 } from "./mutation-types"
 
 export default {
@@ -59,7 +60,11 @@ export default {
   [CLEAR_CAR](state){
     state.shopCar.forEach(food=>food.count = 0)
     state.shopCar = []
-  }
+  },
+  [RECEIVE_SEARCH_SHOPS](state, {searchShops}) {
+    state.searchShops = searchShops
+  },
+
 
 
 }

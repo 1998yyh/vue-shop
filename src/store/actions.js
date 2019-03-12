@@ -9,7 +9,8 @@ import {
   RECEIVE_GOODS,
   ADD_FOOD_COUNT,
   REDUCE_FOOD_COUNT,
-  CLEAR_CAR
+  CLEAR_CAR,
+  RECEIVE_SEARCH_SHOPS
 } from "./mutation-types"
 
 import {
@@ -21,6 +22,7 @@ import {
   reqShopRatings,
   reqShopGoods,
   reqShopInfo,
+  reqSearchShop
 } from "@/api"
 
 export default {
@@ -116,5 +118,14 @@ export default {
   //清除购物车
   clearCar({commit}){
     commit(CLEAR_CAR)
-  }
+  },
+  async searchShops({commit, state}, keyword) {
+
+    const geohash = state.latitude + ',' + state.longitude
+    const result = await reqSearchShop(geohash, keyword)
+    if (result.code === 0) {
+      const searchShops = result.data
+      commit(RECEIVE_SEARCH_SHOPS, {searchShops})
+    }
+  },
 }
