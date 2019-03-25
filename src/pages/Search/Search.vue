@@ -131,7 +131,7 @@
                   margin-bottom 0
     .search_none
       margin: 0 auto
-      color: #333
+      color #333
       background-color: #fff
       text-align: center
       margin-top: 0.125rem

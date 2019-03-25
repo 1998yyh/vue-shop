@@ -6,21 +6,43 @@
       <h3>登录后查看外卖订单</h3>
       <router-link to="/login" tag="button">立即登陆</router-link>
     </section>
+    <section class="food-list-wrap" v-else>
+      <ul class="food-list">
+        <li v-for="(food,index) in shopCar" :key="index">
+          <img :src="food.image" alt="">
+          <p>{{food.name}}</p>
+          <Count :food="food"/>
+        </li>
+      </ul>
+    </section>
+    <section class="settle" v-if="userInfo._id && shopCar.length">
+      <mt-button type="danger" class="toSettle" @click="pay">结算</mt-button>
+    </section>
   </div>
 </template>
 
 <script>
   import HeaderTop from "@/components/HeaderTop/HeaderTop"
-  import { mapState } from "vuex"
+  import Count from "@/components/Count/Count"
+  import { mapState,mapGetters } from "vuex"
+  import { Toast } from "mint-ui"
 	export default {
 		name: "MSite",
     components :{
-      HeaderTop
+      HeaderTop,
+      Count
     },
     computed :{
-      ...mapState(["userInfo"])
+      ...mapState(["userInfo","shopCar"]),
+      ...mapGetters(["totalPrice"])
+    },
+    methods: {
+		  pay() {
+		    const { totalPrice } = this
+        Toast(`共计${totalPrice}元`)
+      }
     }
-	}
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -49,43 +71,42 @@
         outline none
         border-radius 5px
         padding 10px 20px
-  .header
-    background-color #f69
-    position fixed
-    z-index 100
-    left 0
-    top 0
-    width 100%
-    height 45px
-    .header_search
-      position absolute
-      left 15px
-      top 50%
-      transform translateY(-50%)
-      width 10%
-      height 50%
-      .icon-sousuo
-        font-size 25px
-        color #fff
-    .header_title
-      position absolute
-      top 50%
-      left 50%
-      transform translate(-50%, -50%)
-      width 50%
-      color #fff
-      text-align center
-      .header_title_text
-        font-size 20px
-        color #fff
-        display block
-    .header_login
-      font-size 14px
-      color #fff
-      position absolute
-      right 15px
-      top 50%
-      transform translateY(-50%)
-      .header_login_text
-        color #fff
+    .food-list-wrap
+      padding-top 80px
+      .food-list  
+        width 98%
+        
+        margin 0 auto
+        li
+          margin-top 1px
+          box-sizing border-box
+          display: flex
+          justify-content space-between
+          align-items center
+          width 100%
+          padding 5px
+          border-bottom 1px solid gray
+          &:first-child
+            border-top 1px solid gray
+          img
+            display inline-block
+            width 50px
+            height 50px
+          p
+            max-width 120px
+            overflow hidden
+            white-space nowrap
+            text-overflow: ellipsis
+            display inline-block
+            font-size 16px
+            line-height 30px
+            color #666
+    .settle
+      margin-bottom 100px
+      .toSettle
+        margin-top 20px
+        text-align center
+        width 100%
+        height 40px
+        line-height 40px
 </style>

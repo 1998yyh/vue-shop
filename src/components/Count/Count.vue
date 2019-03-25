@@ -16,11 +16,11 @@
 
     methods: {
       addFoodCount() {
-        this.$store.dispatch("addFoodCount",this.food)
+          this.$store.dispatch("addFoodCount",this.food)
       },
       reduceFoodCount() {
         this.$store.dispatch("reduceFoodCount",this.food)
-      },
+      }
     }
   }
 </script>

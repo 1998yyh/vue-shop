@@ -51,7 +51,7 @@
 <script>
   import {mapState} from "vuex"
   import Star from "@/components/Star/Star"
-
+  
 	export default {
 		name: "ShopList",
     data () {
